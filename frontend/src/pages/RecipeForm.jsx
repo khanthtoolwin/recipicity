@@ -63,14 +63,14 @@ export default function RecipeForm() {
   };
   return (
     <div className="mx-auto max-w-md border-2 border-white p-4">
-      <h1 className="mb-6 text-2xl font-bold text-orange-400 text-center">
+      <h1 className="mb-6 text-center text-2xl font-bold text-orange-400">
         Recipe {id ? "Edit " : "Create "} Form
       </h1>
       <form action="" className="space-y-5" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Recipe Title"
-          className="w-full p-1 bg-white"
+          className="w-full bg-white p-1"
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
@@ -79,17 +79,17 @@ export default function RecipeForm() {
         <textarea
           placeholder="Recipe Description"
           rows="5"
-          className="w-full p-1 bg-white"
+          className="w-full bg-white p-1"
           value={description}
           onChange={(e) => {
             setDescription(e.target.value);
           }}
         />
-        <div className="flex justify-evenly items-center ">
+        <div className="flex items-center justify-evenly">
           <input
             type="text"
             placeholder="Recipe Ingredient"
-            className="w-full p-1 bg-white"
+            className="w-full bg-white p-1"
             value={newIngredient}
             onChange={(e) => setNewIngredient(e.target.value)}
           />
@@ -103,12 +103,12 @@ export default function RecipeForm() {
         <div>
           <Ingredients ingredients={ingredients} />
         </div>
-        <ul className="pl-3 list-disc">
+        <ul className="list-disc pl-3">
           {!!errors.length &&
             errors.map((error, index) => (
               <li
                 key={index}
-                className=" text-red-500 font-semibold text-sm capitalize"
+                className="text-sm font-semibold text-red-500 capitalize"
               >
                 {error} is invalid.
               </li>
@@ -116,7 +116,7 @@ export default function RecipeForm() {
         </ul>
         <button
           type="submit"
-          className="w-full px-3 py-1 rounded-full bg-orange-400 text-white"
+          className="w-full rounded-full bg-orange-400 px-3 py-1 text-white"
         >
           {id ? "Update " : "Create "} Recipe
         </button>

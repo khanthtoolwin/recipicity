@@ -1,5 +1,9 @@
 import { Link } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
+import React from "react";
 const NavBar = () => {
+  const { name } = React.useContext(AuthContext);
+  console.log(name);
   return (
     <nav className="flex items-center justify-between bg-white p-5">
       <div>
@@ -31,7 +35,7 @@ const NavBar = () => {
           </li>
         </ul>
       </div>
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         <Link
           to={"/sign-up"}
           className="rounded bg-orange-400 px-4 py-2 text-sm text-white"
@@ -40,7 +44,7 @@ const NavBar = () => {
         </Link>
         <Link
           to={"/sign-in"}
-          className="rounded border bg-white px-4 py-2 text-sm text-black"
+          className="rounded border bg-white px-4 py-2 text-sm text-black transition hover:border-white hover:bg-orange-400 hover:text-white"
         >
           Login
         </Link>

@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router";
+import axios from "../helpers/axios";
 
 import plus from "../assets/plus.svg";
 import Ingredients from "../components/Ingredients";
@@ -19,7 +19,7 @@ export default function RecipeForm() {
   React.useEffect(() => {
     let fetchRecipe = async () => {
       if (id) {
-        let res = await axios.get("http://localhost:4000/api/recipes/" + id);
+        let res = await axios.get("/api/recipes/" + id);
         if (res.status === 200) {
           setTitle(res.data.title);
           setDescription(res.data.description);
@@ -43,12 +43,9 @@ export default function RecipeForm() {
       };
       let res;
       if (id) {
-        res = await axios.patch(
-          "http://localhost:4000/api/recipes/" + id,
-          recipe,
-        );
+        res = await axios.patch("/api/recipes/" + id, recipe);
       } else {
-        res = await axios.post("http://localhost:4000/api/recipes/", recipe);
+        res = await axios.post("/api/recipes/", recipe);
       }
       if (res.status === 200) {
         navigate("/?page=1");

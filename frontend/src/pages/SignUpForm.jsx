@@ -1,7 +1,9 @@
-import axios from "axios";
-import { Button, Label, TextInput } from "flowbite-react";
 import React from "react";
 import { Link, useNavigate } from "react-router";
+import axios from "../helpers/axios";
+
+import { Button, Label, TextInput } from "flowbite-react";
+
 const SignUpForm = () => {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -19,13 +21,7 @@ const SignUpForm = () => {
         email,
         password,
       };
-      let res = await axios.post(
-        "http://localhost:4000/api/users/register",
-        data,
-        {
-          withCredentials: true,
-        },
-      );
+      let res = await axios.post("/api/users/register", data);
       if (res.status === 200) {
         navigate("/");
       }

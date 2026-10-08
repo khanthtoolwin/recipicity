@@ -1,8 +1,8 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import React from "react";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
+import axios from "../helpers/axios";
 const SignInForm = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -16,13 +16,7 @@ const SignInForm = () => {
         email,
         password,
       };
-      let res = await axios.post(
-        "http://localhost:4000/api/users/login",
-        data,
-        {
-          withCredentials: true,
-        },
-      );
+      let res = await axios.post("/api/users/login", data);
       if (res.status === 200) {
         navigate("/");
       }

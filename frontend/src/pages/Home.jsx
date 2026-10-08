@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+
 import RecipeCard from "../components/RecipeCard";
 import Pagination from "../components/Pagination";
-import { useLocation, useNavigate } from "react-router";
+
+import axios from "../helpers/axios";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -16,11 +19,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const response = await fetch(
-        "http://localhost:4000/api/recipes?page=" + page,
-      );
-      if (response.ok) {
-        const data = await response.json();
+      const response = await axios("/api/recipes?page=" + page);
+      if (response.status === 200) {
+        let data = response.data;
         setLinks(data.links);
         setRecipes(data.data);
         //scroll to top
@@ -42,7 +43,7 @@ const Home = () => {
     <div className="space-y-3">
       {!!recipes.length &&
         recipes.map((recipe) => (
-          <div className="bg-white p-5 rounded-2xl space-y-3" key={recipe._id}>
+          <div className="space-y-3 rounded-2xl bg-white p-5" key={recipe._id}>
             <RecipeCard recipe={recipe} onDeleted={onDeleted} />
           </div>
         ))}

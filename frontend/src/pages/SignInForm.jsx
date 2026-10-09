@@ -3,11 +3,13 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import axios from "../helpers/axios";
+import { AuthContext } from "../contexts/AuthContext";
 const SignInForm = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
+  const { dispatch } = React.useContext(AuthContext);
   const login = async (e) => {
     try {
       e.preventDefault();
@@ -16,8 +18,11 @@ const SignInForm = () => {
         email,
         password,
       };
-      let res = await axios.post("/api/users/login", data);
+      let res = await axios.post("/api/users/login", data, {
+        withCredentials: true,
+      });
       if (res.status === 200) {
+        dispatch({ type: "LOGIN", payload: res.data.user });
         navigate("/");
       }
     } catch (error) {

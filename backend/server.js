@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const AuthMiddleware = require("./middlewares/AuthMiddleware")
 
 const recipeRoutes = require("./routes/recipes");
 const userRoutes = require("./routes/users");
@@ -46,7 +47,7 @@ app.get("/", (req, res) => {
   res.json({ msg: "Home directory of Recipicity backend server"});
 });
 
-app.use("/api/recipes", recipeRoutes);
+app.use("/api/recipes", AuthMiddleware, recipeRoutes);
 
 app.use("/api/users", userRoutes);
 

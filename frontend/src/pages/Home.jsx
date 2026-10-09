@@ -15,7 +15,7 @@ const Home = () => {
 
   const searchQuery = new URLSearchParams(location.search);
   let page = searchQuery.get("page"); // String
-  page = parseInt(page); // int
+  page = parseInt(page) ? parseInt(page) : 1; // int
 
   useEffect(() => {
     const fetchRecipes = async () => {

@@ -3,9 +3,9 @@ const RecipeController = require("../controllers/RecipeController");
 const router = express.Router();
 const { body } = require("express-validator");
 const handleErrorMessage = require("../middlewares/handleErrorMessage");
+
 // get all recipes
 router.get("", RecipeController.index);
-
 // store a recipe
 
 router.post(

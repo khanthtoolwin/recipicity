@@ -15,6 +15,7 @@ router.post("/login",
   handleErrorMessage,
   UserController.login
 );
+
 router.post(
   "/register",
   [
@@ -31,5 +32,8 @@ router.post(
   handleErrorMessage,
   UserController.register,
 );
+
+router.post("/logout", UserController.logout)
+
 
 module.exports = router;

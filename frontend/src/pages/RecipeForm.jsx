@@ -48,7 +48,7 @@ export default function RecipeForm() {
         res = await axios.post("/api/recipes/", recipe);
       }
       if (res.status === 200) {
-        navigate("/?page=1");
+        navigate("/");
       }
       setTitle("");
       setDescription("");

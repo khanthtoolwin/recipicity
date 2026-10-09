@@ -7,7 +7,7 @@ const UserController = {
       let {email, password} = req.body;
       let user = await User.login(email, password);
       let token = createToken(user._id);
-      res.cookie("jwt", token)
+      res.cookie("jwt", token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 })
       return res.json({ user, token });
     } catch (error) {
       return res.status(400).json({msg: error.message})
@@ -18,12 +18,16 @@ const UserController = {
       let { name, email, password } = req.body;
       let user = await User.register(name, email, password);
       let token = createToken(user._id);
-      res.cookie("jwt", token);
+      res.cookie("jwt", token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
       return res.json({ user, token });
     } catch (error) {
       return res.status(400).json({ msg: error.message });
     }
   },
+  logout: (req, res) => {
+    res.cookie("jwt", '', { maxAge: 1 });
+    return res.json({message: "User logged out"})
+  }
 };
 
 module.exports = UserController;
